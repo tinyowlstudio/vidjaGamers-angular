@@ -9,6 +9,11 @@ const apiUrl = 'https://vidjagamers-779c791eee4b.herokuapp.com';
   providedIn: 'root'
 })
 export class FetchApiDataService {
+  // function to get token from local storage to pass to API
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
   // Inject the HttpClient module to the constructor params
   // This will provide HttpClient to the entire class, making it available via this.http
   constructor(private http: HttpClient) {
@@ -28,9 +33,12 @@ export class FetchApiDataService {
     );
   }
 
-  public getAllGames(userDetails: any): Observable<any> {
-    console.log(userDetails);
-    return this.http.get(apiUrl + '/games', userDetails).pipe(
+  public getAllGames(): Observable<any> {
+    //console.log(userDetails);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`
+    });
+    return this.http.get(apiUrl + '/games', { headers }).pipe(
       catchError(this.handleError)
     );
   }

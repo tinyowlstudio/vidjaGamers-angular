@@ -15,12 +15,24 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
+import { GameCardComponent } from './game-card/game-card.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: 'welcome', component: WelcomePageComponent },
+  { path: 'games', component: GameCardComponent },
+  { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     UserRegistrationFormComponent,
-    UserLoginFormComponent
+    UserLoginFormComponent,
+    GameCardComponent,
+    WelcomePageComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +47,7 @@ import { UserLoginFormComponent } from './user-login-form/user-login-form.compon
     MatSnackBarModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [],
   bootstrap: [AppComponent]

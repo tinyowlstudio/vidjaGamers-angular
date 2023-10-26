@@ -1,0 +1,6 @@
+<mat-card *ngFor="let game of games; let i=index;">
+    <mat-dialog-content>
+        <mat-card-title>{{game.title}}</mat-card-title>
+        <mat-card-subtitle><img src={{game.image}}/></mat-card-subtitle>
+    </mat-dialog-content>
+</mat-card>
