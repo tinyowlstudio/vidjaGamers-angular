@@ -13,16 +13,25 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 import { GameCardComponent } from './game-card/game-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
-
-import { RouterModule, Routes } from '@angular/router';
+import { ProfileViewComponent } from './profile-view/profile-view.component';
+import { DeveloperDialogComponent } from './developer-dialog/developer-dialog.component';
+import { GenreDialogComponent } from './genre-dialog/genre-dialog.component';
+import { DescriptionDialogComponent } from './description-dialog/description-dialog.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'games', component: GameCardComponent },
+  { path: 'profile', component: ProfileViewComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
 
@@ -32,7 +41,11 @@ const appRoutes: Routes = [
     UserRegistrationFormComponent,
     UserLoginFormComponent,
     GameCardComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    ProfileViewComponent,
+    DeveloperDialogComponent,
+    GenreDialogComponent,
+    DescriptionDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +61,9 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
+    MatIconModule,
+    MatToolbarModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

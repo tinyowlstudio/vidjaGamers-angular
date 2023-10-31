@@ -1,7 +1,6 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -13,20 +12,27 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $vidjaGamers-Angular-client-primary: mat.define-palette(mat.$indigo-palette);
-$vidjaGamers-Angular-client-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$vidjaGamers-Angular-client-accent: mat.define-palette(
+  mat.$pink-palette,
+  A200,
+  A100,
+  A400
+);
 
 // The warn palette is optional (defaults to red).
 $vidjaGamers-Angular-client-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$vidjaGamers-Angular-client-theme: mat.define-light-theme((
-  color: (
-    primary: $vidjaGamers-Angular-client-primary,
-    accent: $vidjaGamers-Angular-client-accent,
-    warn: $vidjaGamers-Angular-client-warn,
+$vidjaGamers-Angular-client-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $vidjaGamers-Angular-client-primary,
+      accent: $vidjaGamers-Angular-client-accent,
+      warn: $vidjaGamers-Angular-client-warn,
+    ),
   )
-));
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -35,5 +41,166 @@ $vidjaGamers-Angular-client-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+//=====================================================
+// OVERALL STYLING
+//=====================================================
+
+$pagecolor: rgb(31, 34, 32);
+$lighterpage: rgb(53, 55, 54);
+$textcolor: rgb(222, 227, 226);
+$buttoncolor: rgb(15, 85, 71);
+$lightbuttoncolor: lighten($buttoncolor, 8%);
+$lighterbuttoncolor: lighten($buttoncolor, 15%);
+$inputcolor: rgb(226, 243, 240);
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: $pagecolor;
+}
+* {
+  box-sizing: border-box;
+  color: $textcolor;
+}
+
+.mat-toolbar.mat-toolbar-single-row {
+  color: #dee3e2;
+  background: transparent;
+  padding: 0;
+  width: 90%;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.mdc-button__label{
+  color: rgb(88, 89, 89);
+  :hover{
+    color: rgb(136, 162, 162);
+  }
+}
+
+//=====================================================
+// WELCOME
+//=====================================================
+
+.main-page{
+  position: relative;
+  .buttons{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    // flex-wrap: wrap;
+    // text-align: center;
+    h1{
+      width: 100%;
+      text-align: center;
+    }
+    .mdc-button.mdc-button--raised.mat-mdc-raised-button.mat-primary.mat-mdc-button-base{
+      width: 200px;
+      margin-bottom: 10px;
+      background-color: $buttoncolor;
+      .mdc-button__label{
+        color: $textcolor;
+      }
+    }
+  }
+}
+
+
+.mat-mdc-card.mdc-card{
+  background-color: $lighterpage;
+  
+}
+
+//=====================================================
+// GAME CARD
+//=====================================================
+.game-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap: 10px;
+  row-gap: 15px;
+  width: 90%;
+  max-width: 1400px;
+  margin: auto;
+  .mat-mdc-card.mdc-card {
+    background-color: #353736;
+    border-radius: 10px;
+    overflow: hidden;
+    .image-container {
+      height: 100%;
+      max-height: 350px;
+      overflow: hidden;
+      .mat-mdc-card-xl-image.mdc-card__media {
+        width: 100%;
+        height: auto;
+      }
+    }
+    .mat-mdc-card-title-group {
+      display: inline;
+      div {
+        padding: 25px;
+        .mat-mdc-card-title {
+          font-size: 1.3em;
+          font-weight: 600;
+          margin-bottom: 10px;
+        }
+        .mat-mdc-card-subtitle {
+          color: #dee3e2;
+        }
+      }
+    }
+    .mat-mdc-card-actions.mdc-card__actions {
+      position: relative;
+      .icon {
+        position: absolute;
+        margin: 0;
+        bottom: 0;
+        right: 0;
+        padding: 60px 20px 20px 60px;
+        background: linear-gradient(
+          -45deg,
+          $buttoncolor 0%,
+          $buttoncolor 50%,
+          rgba(0, 0, 255, 0) 50%,
+          rgba(0, 0, 255, 0) 100%
+        );
+      }
+    }
+  }
+}
+
+// MEDIA QUERY ---------------------------------------------------------
+//=====================================================
+// OVERALL STYLING
+//=====================================================
+//=====================================================
+// GAME CARD
+//=====================================================
+@media (width <= 992px) {
+  .game-list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (width <= 765px) {
+  .game-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (width <= 480px) {
+  .game-list {
+    display: block;
+    .mat-mdc-card.mdc-card{
+      margin-bottom: 20px;
+    }
+  }
+}

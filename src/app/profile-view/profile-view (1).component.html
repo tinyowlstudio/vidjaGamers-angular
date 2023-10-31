@@ -1,0 +1,78 @@
+<div>
+  <button
+  mat-raised-button
+  (click)="gameView()"
+  color="primary"
+>
+  Back
+</button>
+<button
+mat-raised-button
+(click)="signoutUser()"
+color="primary"
+>
+Sign Out
+</button>
+    <p>Username: {{ user.username }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Birthday: {{ user.birthday }}</p>
+
+    <form>
+        <mat-form-field>
+          <input
+            matInput
+            [(ngModel)]="userData.username"
+            placeholder="Username"
+            type="text"
+            name="username"
+            required
+          >
+          </mat-form-field>
+          <mat-form-field>
+          <input
+            matInput
+            [(ngModel)]="userData.password"
+            type = "password"
+            placeholder="Password"
+            name="password"
+            required
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            [(ngModel)]="userData.email"
+            type = "email"
+            placeholder="Email"
+            name="email"
+            required
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            [(ngModel)]="userData.birthday"
+            type = "date"
+            placeholder="Birthday"  
+            name="birthday"
+          >
+        </mat-form-field>
+      </form>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          (click)="editUser()"
+          color="primary"
+        >
+          Update Info
+        </button>
+
+        <button
+        mat-raised-button
+        (click)="deleteUser()"
+        color="primary"
+      >
+        Delete Account
+      </button>
+    </mat-card-actions>
+  </div>

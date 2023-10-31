@@ -1,6 +1,49 @@
-<mat-card *ngFor="let game of games; let i=index;">
-    <mat-dialog-content>
-        <mat-card-title>{{game.title}}</mat-card-title>
-        <mat-card-subtitle><img src={{game.image}}/></mat-card-subtitle>
-    </mat-dialog-content>
-</mat-card>
+<div class="container">
+  <mat-toolbar>
+    <span> Vidja Gamers </span>
+    <span class="example-spacer"></span>
+    <button mat-button (click)="profileView()">Profile</button>
+    <button mat-button (click)="signoutUser()">Sign Out</button>
+  </mat-toolbar>
+
+<div class="game-list">
+  <mat-card *ngFor="let game of games">
+    <div class="image-container">
+          <img mat-card-xl-image src="{{ game.image }}" alt="{{ game.title }}" />
+    </div>
+
+    <mat-card-title-group>
+      <mat-card-title>{{ game.title }}</mat-card-title>
+      <mat-card-subtitle
+        >{{ game.developer.name }}</mat-card-subtitle
+      >
+    </mat-card-title-group>
+    <mat-card-actions>
+      <button mat-button (click)="openGenreDialog(game.title)">
+        Genre
+      </button>
+      <button
+        mat-button
+        (click)="openDeveloperDialog(game.developer.name)"
+      >
+        Developer
+      </button>
+      <button
+        mat-button
+        (click)="openDescriptionDialog(game.title)"
+      >
+        Description
+      </button>
+      <div class="icon">
+              <mat-icon *ngIf="isFavorite(game)" (click)="deleteFavorite(game._id)"
+        >favorite</mat-icon
+      >
+      <mat-icon *ngIf="!isFavorite(game)" (click)="addFavorite(game._id)"
+        >favorite_border</mat-icon
+      >
+      </div>
+
+    </mat-card-actions>
+  </mat-card>
+  </div>
+</div>

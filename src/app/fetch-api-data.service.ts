@@ -43,66 +43,89 @@ export class FetchApiDataService {
     );
   }
 
-  public getOneGame(userDetails: any): Observable<any> {
-    console.log(userDetails);
-    return this.http.get(apiUrl + '/games/:title', userDetails).pipe(
+      //normally, to get a single genre we would do this, but games can have multiple,
+      //so we have to extract genre array from just the game
+  public getOneGame(gameTitle: any): Observable<any> {
+    //console.log(userDetails);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`
+    });
+    return this.http.get(apiUrl + '/games/' + gameTitle, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+  // public getGenre(genreName: any): Observable<any> {
+  //   //console.log(userDetails);
+  //   const headers = new HttpHeaders({
+  //     Authorization: `Bearer ${this.getToken()}`
+  //   });
+  //   return this.http.get(apiUrl + '/genre/' + genreName, { headers }).pipe(
+  //     catchError(this.handleError)
+  //   );
+  // }
+
+  public getDeveloper(developerName: string): Observable<any> {
+    //console.log(userDetails);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`
+    });
+    return this.http.get(apiUrl + '/developer/' +  developerName , { headers }).pipe(
       catchError(this.handleError)
     );
   }
 
-  public getDeveloper(userDetails: any): Observable<any> {
-    console.log(userDetails);
-    return this.http.get(apiUrl + '/developer/:developerName', userDetails).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  public getGenre(userDetails: any): Observable<any> {
-    console.log(userDetails);
-    return this.http.get(apiUrl + '/genre/:genreName', userDetails).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  public getUser(userDetails: any): Observable<any> {
-    console.log(userDetails);
-    return this.http.get(apiUrl + '/users/:username', userDetails).pipe(
+  public getUser(userName: any): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`
+    });
+    return this.http.get(apiUrl + '/users/' + userName, { headers }).pipe(
       catchError(this.handleError)
     );
   }
 
   //Info obtained when getting user, no special endpoint for getting all user favorites
-  public userFavorites(userDetails: any): Observable<any> {
-    console.log(userDetails);
-    return this.http.get(apiUrl + '/users/:username', userDetails).pipe(
+  public userFavorites(userName: any): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`
+    });
+    return this.http.get(apiUrl + '/users/' + userName, { headers }).pipe(
       catchError(this.handleError)
     );
   }
 
-  public addFavorite(userDetails: any): Observable<any> {
-    console.log(userDetails);
-    return this.http.post(apiUrl + '/users/:username/games/:gameID', userDetails).pipe(
+  public addFavorite(userName: any, gameID: any): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`
+    });
+    //POST needs a request body(?), so null has to be placed here to make it work 
+    return this.http.post(apiUrl + '/users/' + userName + '/games/' + gameID, null, { headers }).pipe(
       catchError(this.handleError)
     );
   }
 
-  public deleteFavorite(userDetails: any): Observable<any> {
-    console.log(userDetails);
-    return this.http.delete(apiUrl + '/users/:username/games/:gameID', userDetails).pipe(
+  public deleteFavorite(userName: any, gameID: any): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`
+    });
+    return this.http.delete(apiUrl + '/users/'+ userName + '/games/' + gameID, { headers }).pipe(
       catchError(this.handleError)
     );
   }
 
-  public editUser(userDetails: any): Observable<any> {
-    console.log(userDetails);
-    return this.http.put(apiUrl + '/users/:username', userDetails).pipe(
+  public editUser(userName: any, updatedData: any): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`
+    });
+    return this.http.put(apiUrl + '/users/' + userName, updatedData, { headers }).pipe(
       catchError(this.handleError)
     );
   }
 
-  public deleteUser(userDetails: any): Observable<any> {
-    console.log(userDetails);
-    return this.http.delete(apiUrl + '/users/:username', userDetails).pipe(
+  public deleteUser(userName: any): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`
+    });
+    return this.http.delete(apiUrl + '/users/' + userName, { headers }).pipe(
       catchError(this.handleError)
     );
   }
@@ -110,6 +133,9 @@ export class FetchApiDataService {
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
       console.error('Some error occurred:', error.error.message);
+    } else if (error.status === 200) { //specifically for delete user since it would throw errors for HTTP200 for some reason
+      console.log('Success:', error.error.text);
+      return (error.error.text); // Return the success message
     } else {
       console.error(
         `Error Status code ${error.status}, ` +
@@ -117,4 +143,7 @@ export class FetchApiDataService {
     }
     return throwError(() => 'Something bad happened; please try again later.');
   }
+  
+  
+  
 }
