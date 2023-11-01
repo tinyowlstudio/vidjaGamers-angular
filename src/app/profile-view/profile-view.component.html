@@ -5,12 +5,16 @@
     <button mat-button color="primary">Profile</button>
     <button mat-button color="primary" (click)="signoutUser()">Sign Out</button>
   </mat-toolbar>
-  <div class="user-info">
-        <p>Username: {{ user.username }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>Birthday: {{ user.birthday }}</p>
-  </div>
-    <form>
+  <div class="content">
+    <div class="user-info">
+      <h1>User Info</h1>
+      <p>Username: {{ user.username }}</p>
+      <p>Email: {{ user.email }}</p>
+      <p>Birthday: {{ user.birthday }}</p>
+    </div>
+    <div class="update">
+      <h1>Update Info</h1>
+      <form>
         <mat-form-field>
           <input
             matInput
@@ -19,53 +23,47 @@
             type="text"
             name="username"
             required
-          >
-          </mat-form-field>
-          <mat-form-field>
+          />
+        </mat-form-field>
+        <mat-form-field>
           <input
             matInput
             [(ngModel)]="userData.password"
-            type = "password"
+            type="password"
             placeholder="Password"
             name="password"
             required
-          >
+          />
         </mat-form-field>
         <mat-form-field>
           <input
             matInput
             [(ngModel)]="userData.email"
-            type = "email"
+            type="email"
             placeholder="Email"
             name="email"
             required
-          >
+          />
         </mat-form-field>
         <mat-form-field>
           <input
             matInput
             [(ngModel)]="userData.birthday"
-            type = "date"
-            placeholder="Birthday"  
+            type="date"
+            placeholder="Birthday"
             name="birthday"
-          >
+          />
         </mat-form-field>
       </form>
       <mat-card-actions>
-        <button
-          mat-raised-button
-          (click)="editUser()"
-          color="primary"
-        >
+        <button mat-raised-button (click)="editUser()" color="primary">
           Update Info
         </button>
 
-        <button
-        mat-raised-button
-        (click)="deleteUser()"
-        color="primary"
-      >
-        Delete Account
-      </button>
-    </mat-card-actions>
+        <button mat-raised-button (click)="deleteUser()" color="primary">
+          Delete Account
+        </button>
+      </mat-card-actions>
+    </div>
   </div>
+</div>

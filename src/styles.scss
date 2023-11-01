@@ -72,16 +72,36 @@ body {
   background: transparent;
   padding: 0;
   width: 90%;
+  height: 90px;
   max-width: 1400px;
   margin: auto;
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  :first-child{
+    font-size: 2em;
+    font-weight: 700;
+  }
 }
 
 .mdc-button__label{
-  color: rgb(88, 89, 89);
-  :hover{
-    color: rgb(136, 162, 162);
+  color: rgb(130, 130, 130);
+  font-size: 1.1em;
   }
-}
+  .mdc-text-field--disabled, .mdc-text-field--filled{
+    background-color: rgb(218, 227, 220)!important;
+    }
+
+    .mdc-button.mdc-button--raised.mat-mdc-raised-button.mat-primary.mat-mdc-button-base{
+      background-color: $buttoncolor;
+      .mdc-button__label{
+        color: $textcolor;
+      }
+    }
+
+    .cdk-overlay-dark-backdrop{
+      background:rgba(0,0,0,.5);
+    }
 
 //=====================================================
 // WELCOME
@@ -105,10 +125,6 @@ body {
     .mdc-button.mdc-button--raised.mat-mdc-raised-button.mat-primary.mat-mdc-button-base{
       width: 200px;
       margin-bottom: 10px;
-      background-color: $buttoncolor;
-      .mdc-button__label{
-        color: $textcolor;
-      }
     }
   }
 }
@@ -116,8 +132,8 @@ body {
 
 .mat-mdc-card.mdc-card{
   background-color: $lighterpage;
-  
 }
+  
 
 //=====================================================
 // GAME CARD
@@ -135,13 +151,20 @@ body {
     border-radius: 10px;
     overflow: hidden;
     .image-container {
-      height: 100%;
-      max-height: 350px;
-      overflow: hidden;
+      width: 100%;
+      height: 350px;
+      background-size: cover;
+      background-position: center;
       .mat-mdc-card-xl-image.mdc-card__media {
         width: 100%;
         height: auto;
       }
+    }
+    .game-content{
+      height: 35%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     .mat-mdc-card-title-group {
       display: inline;
@@ -153,50 +176,91 @@ body {
           margin-bottom: 10px;
         }
         .mat-mdc-card-subtitle {
-          color: #dee3e2;
+          color: $textcolor;
         }
       }
     }
     .mat-mdc-card-actions.mdc-card__actions {
       position: relative;
-      .icon {
-        position: absolute;
-        margin: 0;
-        bottom: 0;
-        right: 0;
-        padding: 60px 20px 20px 60px;
-        background: linear-gradient(
-          -45deg,
-          $buttoncolor 0%,
-          $buttoncolor 50%,
-          rgba(0, 0, 255, 0) 50%,
-          rgba(0, 0, 255, 0) 100%
-        );
+    }
+  }
+}
+
+.icon {
+  position: absolute;
+  margin: 0;
+  bottom: 0;
+  right: 0;
+  padding: 40px 10px 10px 40px;
+  background: linear-gradient(
+    -45deg,
+    $buttoncolor 0%,
+    $buttoncolor 50%,
+    rgba(0, 0, 255, 0) 50%,
+    rgba(0, 0, 255, 0) 100%
+  );
+}
+
+.details-popup{
+  .mat-mdc-card-header{
+    border-bottom: $textcolor 0.5px solid;
+    padding: 0;
+    margin: 0 16px 8px 16px;
+    font-size: 1.2em;
+
+  }
+  .mat-mdc-card-content{
+    p{
+      margin: 3px;
+    }
+  }
+}
+//=====================================================
+// PROFILE VIEW
+//=====================================================
+
+.content{
+  width: 90%;
+  margin: auto;
+  max-width: 1400px;
+  display: flex;
+  align-items: stretch;
+  .user-info{
+    flex-grow: 1;
+  }
+  .update{
+    flex-grow: 1;
+    form{
+      display: flex;
+      flex-direction: column;
+    }
+    .mdc-card__actions{
+      button{
+        margin-right: 10px;
       }
     }
   }
 }
 
 // MEDIA QUERY ---------------------------------------------------------
-//=====================================================
-// OVERALL STYLING
-//=====================================================
-//=====================================================
-// GAME CARD
-//=====================================================
-@media (width <= 992px) {
+@media (width <= 1300px) {
   .game-list {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
-@media (width <= 765px) {
+@media (width <= 930px) {
   .game-list {
     grid-template-columns: 1fr 1fr;
   }
 }
 
-@media (width <= 480px) {
+@media (width <= 765px) {
+  .content{
+    flex-direction: column;
+  }
+}
+@media (width <= 680px) {
   .game-list {
     display: block;
     .mat-mdc-card.mdc-card{

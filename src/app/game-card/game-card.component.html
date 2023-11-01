@@ -8,10 +8,10 @@
 
 <div class="game-list">
   <mat-card *ngFor="let game of games">
-    <div class="image-container">
-          <img mat-card-xl-image src="{{ game.image }}" alt="{{ game.title }}" />
+    <div class="image-container" [style.background-image]="'url(' + game.image + ')'">
+          <!-- <img mat-card-xl-image src="{{ game.image }}" alt="{{ game.title }}" /> -->
     </div>
-
+    <div class="game-content">
     <mat-card-title-group>
       <mat-card-title>{{ game.title }}</mat-card-title>
       <mat-card-subtitle
@@ -34,16 +34,16 @@
       >
         Description
       </button>
-      <div class="icon">
-              <mat-icon *ngIf="isFavorite(game)" (click)="deleteFavorite(game._id)"
-        >favorite</mat-icon
-      >
-      <mat-icon *ngIf="!isFavorite(game)" (click)="addFavorite(game._id)"
-        >favorite_border</mat-icon
-      >
-      </div>
-
     </mat-card-actions>
+    </div>
+    <div class="icon">
+      <mat-icon *ngIf="isFavorite(game)" (click)="deleteFavorite(game._id)"
+>favorite</mat-icon
+>
+<mat-icon *ngIf="!isFavorite(game)" (click)="addFavorite(game._id)"
+>favorite_border</mat-icon
+>
+</div>
   </mat-card>
   </div>
 </div>

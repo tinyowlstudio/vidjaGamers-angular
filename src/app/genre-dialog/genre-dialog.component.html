@@ -1,10 +1,12 @@
-<mat-card>
+<mat-card class="details-popup">
   <div *ngFor="let genre of data.game.genre">
     <mat-card-header>
-      <mat-card-title>Name: {{ genre.name }}</mat-card-title>
+      <mat-card-title>
+        <p>{{ genre.name }}</p>
+      </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p>Description: {{ genre.description }}</p>
+      <p>{{ genre.description }}</p>
     </mat-card-content>
   </div>
 </mat-card>
