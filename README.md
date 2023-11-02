@@ -28,27 +28,27 @@ Additionally, I used lite-server (https://www.npmjs.com/package/lite-server) to 
 - Pagination to accomodate for more games without flooding the page and causing long loading times
 
 ## Version History
-Version 0.5 (10-31-2023)
+### Version 0.5 (10-31-2023)
 - Adjusted more styling
 - Created documentation using TypeDoc
-Version 0.4 (10-31-2023)
+### Version 0.4 (10-31-2023)
 - Created components for a games genre, developer, and description
 - Created the profile view component
 - Added more functions to fetch the API
 - Created functions for each module to work with the fetch-api-functions to display information
 - Custom styled the app to look more in line with the React app
 - Built the app on a separate repository (link above)
-Version 0.4 (10-26-2023)
+### Version 0.4 (10-26-2023)
 - Created components for the welcome page and games page
 - Swapped the login and registration component from being in the app component to the welcome component
 - Added getToken functionality for authorization 
 - Created a working function that was able to fetch and list games within the API with authorization
-Version 0.3 (10-24-2023)
+### Version 0.3 (10-24-2023)
 - Created the main app module, along with the login form and registration form
 - Added HTML components to test out the API calls
-Version 0.2 (10-23-2023)
+### Version 0.2 (10-23-2023)
 - Tested API endpoints from the games-api made before and ensured that there was a response
 - Added HttpClientModule
-Version 0.1 (10-23-2023)
+### Version 0.1 (10-23-2023)
 - Started with an Angular template and tested to see how it worked
 
