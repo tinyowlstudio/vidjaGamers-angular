@@ -1,12 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-
-// You'll use this import to close the dialog on success
 import { MatDialogRef } from '@angular/material/dialog';
-
-// This import brings in the API calls we created in 6.2
 import { FetchApiDataService } from '../fetch-api-data.service';
-
-// This import is used to display notifications back to the user
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Router } from '@angular/router';
@@ -16,8 +10,13 @@ import { Router } from '@angular/router';
   templateUrl: './user-login-form.component.html',
   styleUrls: ['./user-login-form.component.scss'],
 })
+
+/**
+ * This is the dialog for user login
+ */
 export class UserLoginFormComponent implements OnInit {
 
+  /** this will store the username and password from the input fields */
   @Input() userData = { username: '', password: ''};
 
   
@@ -30,20 +29,23 @@ export class UserLoginFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+/** log in the user */
   loginUser(): void {
-    this.fetchApiData.userLogin(this.userData).subscribe({ //the API functions come from fetch-api-data.service.ts
+    this.fetchApiData.userLogin(this.userData).subscribe({ 
       next: (result) => {
-        //store data on success
+        /** store data on success */
         localStorage.setItem('user', JSON.stringify(result.user));
         localStorage.setItem('token', result.token);
 
-        this.dialogRef.close(); // This will close the modal on success!
+        /** Close dialog on success and give confirmation */
+        this.dialogRef.close();
         console.log("login successful");
         this.snackBar.open( 'Login Successful!',"OK", {
           duration: 2000
         });
         this.router.navigate(['games']);
       },
+      /** If there's an issue, there will be a pop up */
       error: (result) => {
         console.log(result);
         this.snackBar.open("Unable to Login", 'OK', {

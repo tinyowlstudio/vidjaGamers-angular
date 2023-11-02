@@ -9,8 +9,14 @@ import { Router } from '@angular/router';
   templateUrl: './welcome-page.component.html',
   styleUrls: ['./welcome-page.component.scss']
 })
+
+/**
+ * The welcome page stores two toher components
+ * User Registration and User Login
+ */
 export class WelcomePageComponent implements OnInit {
   constructor(public dialog: MatDialog, private router: Router) { }
+  /** If there's a user already stored in local storage, redirect to home page (games) */
   ngOnInit(): void {
     if (localStorage.getItem("token") && localStorage.getItem("user")) {
       this.router.navigate(['games']);

@@ -8,17 +8,28 @@ const apiUrl = 'https://vidjagamers-779c791eee4b.herokuapp.com';
 @Injectable({
   providedIn: 'root'
 })
+/**
+* The functions included in this class all use API calls
+*/
 export class FetchApiDataService {
-  // function to get token from local storage to pass to API
+  /**
+ * function to get token from local storage to pass to API
+ */
+
   getToken(): string | null {
     return localStorage.getItem('token');
   }
 
-  // Inject the HttpClient module to the constructor params
-  // This will provide HttpClient to the entire class, making it available via this.http
+  /**
+* Inject the HttpClient module to the constructor params
+* This will provide HttpClient to the entire class, making it available via this.http
+*/
+
   constructor(private http: HttpClient) {
   }
-  // Making the api call for the user registration endpoint
+  /**
+   * User Registration
+*/
   public userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http.post(apiUrl + '/users', userDetails).pipe(
@@ -26,15 +37,19 @@ export class FetchApiDataService {
     );
   }
 
+  /**
+ * User Login
+*/
   public userLogin(userDetails: any): Observable<any> {
-    //console.log(userDetails);
     return this.http.post(apiUrl + '/login', userDetails).pipe(
       catchError(this.handleError)
     );
   }
 
+  /**
+  * Get the whole games array with all the data
+  */
   public getAllGames(): Observable<any> {
-    //console.log(userDetails);
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.getToken()}`
     });
@@ -43,10 +58,10 @@ export class FetchApiDataService {
     );
   }
 
-      //normally, to get a single genre we would do this, but games can have multiple,
-      //so we have to extract genre array from just the game
+  /**
+   * Get data from a single game
+   */
   public getOneGame(gameTitle: any): Observable<any> {
-    //console.log(userDetails);
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.getToken()}`
     });
@@ -54,26 +69,39 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-  // public getGenre(genreName: any): Observable<any> {
-  //   //console.log(userDetails);
-  //   const headers = new HttpHeaders({
-  //     Authorization: `Bearer ${this.getToken()}`
-  //   });
-  //   return this.http.get(apiUrl + '/genre/' + genreName, { headers }).pipe(
-  //     catchError(this.handleError)
-  //   );
-  // }
 
+    /**
+   * Get genres of a single game
+   * 
+   * getting the game's genre data also uses this function because it's 
+   * an array and the API only supports an API call to extract a single genre
+   * using the :genre endpoint
+   */
+  public getGenres(gameTitle: any): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`
+    });
+    return this.http.get(apiUrl + '/games/' + gameTitle, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  /**
+  * Get developer data
+  */
   public getDeveloper(developerName: string): Observable<any> {
     //console.log(userDetails);
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.getToken()}`
     });
-    return this.http.get(apiUrl + '/developer/' +  developerName , { headers }).pipe(
+    return this.http.get(apiUrl + '/developer/' + developerName, { headers }).pipe(
       catchError(this.handleError)
     );
   }
 
+    /**
+  * Get logged in user data
+  */
   public getUser(userName: any): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.getToken()}`
@@ -82,8 +110,12 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-
-  //Info obtained when getting user, no special endpoint for getting all user favorites
+  /**
+   * Get user's array of favorite games
+   * 
+  * Getting a user's favorite also doesn't have a special endpoint, so
+  * we just use the same endpoint as getUser
+  */
   public userFavorites(userName: any): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.getToken()}`
@@ -93,6 +125,9 @@ export class FetchApiDataService {
     );
   }
 
+    /**
+  * Push new favorite game onto user's favorite game array
+  */
   public addFavorite(userName: any, gameID: any): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.getToken()}`
@@ -103,15 +138,21 @@ export class FetchApiDataService {
     );
   }
 
+      /**
+  * Delete new favorite game onto user's favorite game array
+  */
   public deleteFavorite(userName: any, gameID: any): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.getToken()}`
     });
-    return this.http.delete(apiUrl + '/users/'+ userName + '/games/' + gameID, { headers }).pipe(
+    return this.http.delete(apiUrl + '/users/' + userName + '/games/' + gameID, { headers }).pipe(
       catchError(this.handleError)
     );
   }
 
+    /**
+  * Edit user's data
+  */
   public editUser(userName: any, updatedData: any): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.getToken()}`
@@ -121,6 +162,9 @@ export class FetchApiDataService {
     );
   }
 
+      /**
+  * Delete user
+  */
   public deleteUser(userName: any): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.getToken()}`
@@ -130,12 +174,15 @@ export class FetchApiDataService {
     );
   }
 
+      /**
+  * Handle any errors if necessary
+  */
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
       console.error('Some error occurred:', error.error.message);
-    } else if (error.status === 200) { //specifically for delete user since it would throw errors for HTTP200 for some reason
+    } else if (error.status === 200) { /** specifically for delete user since it would throw errors for HTTP200 for some reason */
       console.log('Success:', error.error.text);
-      return (error.error.text); // Return the success message
+      return (error.error.text); /** Return the success message */
     } else {
       console.error(
         `Error Status code ${error.status}, ` +
@@ -143,7 +190,7 @@ export class FetchApiDataService {
     }
     return throwError(() => 'Something bad happened; please try again later.');
   }
-  
-  
-  
+
+
+
 }

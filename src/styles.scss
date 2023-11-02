@@ -92,7 +92,7 @@ body {
     background-color: rgb(218, 227, 220)!important;
     }
 
-    .mdc-button.mdc-button--raised.mat-mdc-raised-button.mat-primary.mat-mdc-button-base{
+    .mdc-button--raised.mat-mdc-raised-button.mat-primary{
       background-color: $buttoncolor;
       .mdc-button__label{
         color: $textcolor;
@@ -237,6 +237,9 @@ body {
     .mdc-card__actions{
       button{
         margin-right: 10px;
+      }
+      button:nth-child(2){
+        background-color: rgb(135, 10, 10);
       }
     }
   }

@@ -1,27 +1,54 @@
-# VidjaGamersAngularClient
+# Vidja Gamers Angular Client
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.7.
+This project is the Angular version of the React app as seen here: https://github.com/Alioran/vidjagamers-client
+----------------------------------
+This uses the same backend API and endpoints, but uses Angular-CLI to build the app. It also uses both components and templates as per the Angular framework. While this isn't a one to one iteration of the React version, it carries the core functionalities that the original had. Base design work and functionality were also created with Angular Material and edited as per previous design.
 
-## Development server
+Current functions include: 
+- Registering a user
+- Logging in and out
+- Storing data to local storage (for both authorization and displaying info)
+- Rerouting based on whether or not youre logged in or not
+- Displaying the list of games provided by the API
+- Favoriting/unfavoriting games
+- Clicking for more details about the description, genre, and developer of a specific game
+- Displaying user's details (excluding their password)
+- Allowing changes to user's information
+- Deleting user from the database
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+To see the app in action, you can follow this link: https://alioran.github.io/vidjagames-angular-app/
 
-## Code scaffolding
+Additionally, I used lite-server (https://www.npmjs.com/package/lite-server) to test builds and TypeDoc (https://typedoc.org/) for documenation 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Possible Future Updates
+- Be in line with the angular client and show favorite games on the user's profile page
+- Instead of a pop up dialog for Genre, Developer, and Description, maybe having a hover over dialog box might work for smaller pieces of text. This will need user testing to see what works better
+- Work on branding and apply it to both Angular and React apps
+- A search bar or sorting mechanism like in the React version
+- Pagination to accomodate for more games without flooding the page and causing long loading times
 
-## Build
+## Version History
+Version 0.5 (10-31-2023)
+- Adjusted more styling
+- Created documentation using TypeDoc
+Version 0.4 (10-31-2023)
+- Created components for a games genre, developer, and description
+- Created the profile view component
+- Added more functions to fetch the API
+- Created functions for each module to work with the fetch-api-functions to display information
+- Custom styled the app to look more in line with the React app
+- Built the app on a separate repository (link above)
+Version 0.4 (10-26-2023)
+- Created components for the welcome page and games page
+- Swapped the login and registration component from being in the app component to the welcome component
+- Added getToken functionality for authorization 
+- Created a working function that was able to fetch and list games within the API with authorization
+Version 0.3 (10-24-2023)
+- Created the main app module, along with the login form and registration form
+- Added HTML components to test out the API calls
+Version 0.2 (10-23-2023)
+- Tested API endpoints from the games-api made before and ensured that there was a response
+- Added HttpClientModule
+Version 0.1 (10-23-2023)
+- Started with an Angular template and tested to see how it worked
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
