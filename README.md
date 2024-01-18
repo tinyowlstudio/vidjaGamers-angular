@@ -16,7 +16,7 @@ Current functions include:
 - Allowing changes to user's information
 - Deleting user from the database
 
-To see the app in action, you can follow this link: https://alioran.github.io/vidjagames-angular-app/
+To see the app in action, you can follow this link: https://tinyowlstudio.github.io/vidjagames-angular-app/
 
 Additionally, I used lite-server (https://www.npmjs.com/package/lite-server) to test builds and TypeDoc (https://typedoc.org/) for documenation 
 
