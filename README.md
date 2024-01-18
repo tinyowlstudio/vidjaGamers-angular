@@ -1,6 +1,6 @@
 # Vidja Gamers Angular Client
 
-This project is the Angular version of the React app as seen here: https://github.com/Alioran/vidjagamers-client
+This project is the Angular version of the React app as seen here: https://github.com/tinyowlstudio/vidjagamers-client
 ----------------------------------
 This uses the same backend API and endpoints, but uses Angular-CLI to build the app. It also uses both components and templates as per the Angular framework. While this isn't a one to one iteration of the React version, it carries the core functionalities that the original had. Base design work and functionality were also created with Angular Material and edited as per previous design.
 
